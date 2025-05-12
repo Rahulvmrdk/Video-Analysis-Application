@@ -4,4 +4,4 @@
 4. install yt-dlp----------------------------> pip install yt-dlp
 5. install whisperx--------------------------> pip install whisperx
 6. download and install ffmpeg
-Install above libraries 
+Install above libraries inside your .venv
