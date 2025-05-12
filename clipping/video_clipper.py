@@ -1,8 +1,8 @@
 # clipping/video_clipper.py
 
 #from moviepy import VideoFileClip
-#from moviepy.editor import VideoFileClip  # ✅ Correct import for MoviePy 2.x
-from moviepy.video.io.VideoFileClip import VideoFileClip
+from moviepy.editor import VideoFileClip  # ✅ Correct import for MoviePy 2.x
+# moviepy.video.io.VideoFileClip import VideoFileClip
 
 def clip_video(video_path, start_time, end_time, output_path):
     with VideoFileClip(video_path) as video:  # Use context manager for cleanup
