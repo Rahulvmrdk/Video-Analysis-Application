@@ -1,6 +1,7 @@
 # preprocessing/audio_extractor.py
 
-from moviepy import VideoFileClip
+#from moviepy import 
+from moviepy.editor import VideoFileClip  # ✅ Correct import for MoviePy 2.x
 import os
 
 def extract_audio(video_path):
