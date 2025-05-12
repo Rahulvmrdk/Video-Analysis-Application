@@ -3,6 +3,7 @@ os.environ["STREAMLIT_DISABLE_WATCHDOG_WARNINGS"] = "true"
 
 import streamlit as st
 import whisper
+import uuid
 
 from downloader.youtube_downloader import download_video
 from preprocessing.audio_extractor import extract_audio
@@ -51,10 +52,19 @@ if st.button("🔍 Analyze and Extract Highlights"):
         else:
             with st.spinner("✂️ Clipping video segments..."):
                 for event, time in events.items():
-                    output = f"{event}_clip.mp4"
-                    clip_video(video_path, time - buffer_time, time + buffer_time, output)
-                    st.success(f"{event.capitalize()} clip created!")
-                    with open(output, "rb") as f:
-                        st.download_button(f"⬇️ Download {event} Clip", f, file_name=output)
+                    output = f"{event}_{uuid.uuid4().hex[:6]}.mp4"
+                    #-----------------------------------------------------------------
+                    #clip_video(video_path, time - buffer_time, time + buffer_time, output)
+                    #st.success(f"{event.capitalize()} clip created!")
+                    #with open(output, "rb") as f:
+                    #    st.download_button(f"⬇️ Download {event} Clip", f, file_name=output)
+                    #-----------------------------------------------------------------
+                    try:
+                        clip_video(video_path, time - buffer_time, time + buffer_time, output)
+                        st.success(f"{event.capitalize()} clip created!")
+                        with open(output, "rb") as f:
+                            st.download_button(f"⬇️ Download {event} Clip", f, file_name=output)
+                    except Exception as e:
+                        st.error(f"❌ Failed to create clip for {event}: {str(e)}")
 
 st.markdown("---")
